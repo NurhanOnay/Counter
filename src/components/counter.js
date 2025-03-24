@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Counter({value }) {
+function Counter({value,adım=1 }) {//adım sayısı değiştirilebilir
   const [count, setCount] = useState(() => {
     const saved = localStorage.getItem("count");
     return saved !== null ? Number(saved) : value;
@@ -8,8 +8,8 @@ function Counter({value }) {
   useEffect(() => {
     localStorage.setItem("count", count);
   }, [count]);
-  const arttır = () => setCount(count + 1);
-  const azalt = () => setCount(count - 1);
+  const arttır = () => setCount(count + adım);
+  const azalt = () => setCount(count - adım);
   const sıfırla = () => setCount(0);
   return (
     <div style={{ textAlign: "center", fontSize: "30px" }}>
