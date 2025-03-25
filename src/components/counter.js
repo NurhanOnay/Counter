@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-function Counter({value,adım=1 }) {//adım sayısı değiştirilebilir
+function Counter({value}) {
   const [count, setCount] = useState(() => {
     const saved = localStorage.getItem("count");
     return saved !== null ? Number(saved) : value;
   });
+  const [adım, setAdım] = useState(1); // Kullanıcının belirleyeceği artış miktarı
   useEffect(() => {
     localStorage.setItem("count", count);
   }, [count]);
@@ -12,7 +13,17 @@ function Counter({value,adım=1 }) {//adım sayısı değiştirilebilir
   const azalt = () => setCount(count - adım);
   const sıfırla = () => setCount(0);
   return (
-    <div style={{ textAlign: "center", fontSize: "30px" }}>
+      <div style={{ textAlign: "center", fontSize: "20px" }}>
+      
+      <label>
+       Sence kaç kaç artmalı ?
+        <input 
+          type="number" 
+          value={adım} 
+          onChange={(e) => setAdım(Number(e.target.value))} 
+          style={{ marginLeft: "10px", width: "50px" }} 
+        />
+      </label>
       <h1>Counter: {count}</h1>
       <button onClick={arttır}
         style={buttonStyle}>+</button>
